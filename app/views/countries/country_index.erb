@@ -1,0 +1,9 @@
+
+<h1>The Countries You Have Visited:</h1>
+
+<h2><a href="/countries/new">Create a new country:</a></h2>
+
+
+<% @country.each do |country| %>
+	<h3><a href="/countries/<%= country.id %>"> <%= country.name %></a></h3>
+<% end %>	
