@@ -10,6 +10,15 @@ class CityController < ApplicationController
 		erb :'cities/city_new'
 	end	
 
+	post '/cities/new' do
+		if !params[:name].empty?
+			City.create(name: params[:name])
+			redirect to "/cities"
+		else
+			redirect to "/cities"
+		end
+	end			
+
 	get '/cities/:id' do
 		@city = City.find_by_id(params[:id])
 		erb :'cities/city_show'
