@@ -15,7 +15,7 @@ describe "City" do
 	end
 	
 	it "belongs to a country" do
-		@country.citys << @city
+		@country.cities << @city
 		expect(@city.country).to eq(@country)
 	end		
 end

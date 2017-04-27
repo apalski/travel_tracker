@@ -1,6 +1,6 @@
 
 class User < ActiveRecord::Base
 
-	has_many :countrys
-	has_many :citys, through: :countrys
+	has_many :countries
+	has_many :cities, through: :countries
 end

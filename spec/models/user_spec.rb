@@ -9,6 +9,12 @@ describe "User" do
 		@country2 = Country.create(:name => "England")
 
 		@user = User.create(:name => "Mary", :email => "mary@gmail.com", :password => "mary_007")
+
+		@country1.cities << @city1
+		@country1.cities << @city2
+
+		@user.countries << @country1
+		@user.countries << @country2
 	end
 	
 	it "has a name, an email and a password" do
@@ -18,16 +24,13 @@ describe "User" do
 	end
 	
 	it "has many countries" do
-		@user.countrys << @country1
-		@user.countrys << @country2
-		expect(@user.countrys).to include(@country1)
-		expect(@user.countrys).to include(@country2)
+		@user.countries << @country1
+		@user.countries << @country2
+		expect(@user.countries).to include(@country1)
+		expect(@user.countries).to include(@country2)
 	end
 	
 	it "has many cities through countries" do
-		@user.cities << @city1
-		@user.cities << @city2
-		expect(@user.citys).to include(@city1)
-		expect(@user.citys).to include(@city2)
+		expect(@user.cities.count).to eq(2)
 	end		
 end

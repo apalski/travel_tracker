@@ -15,14 +15,14 @@ describe "Country" do
 	end
 	
 	it "has many cities" do
-		@country.citys << @city1
-		@country.citys << @city2
-		expect(@country.citys).to include(@city1)
-		expect(@country.citys).to include(@city2)
+		@country.cities << @city1
+		@country.cities << @city2
+		expect(@country.cities).to include(@city1)
+		expect(@country.cities).to include(@city2)
 	end		
 
 	it "belongs to a user" do
-		@user.countrys << @country
+		@user.countries << @country
 		expect(@country.user).to eq(@user)
 	end	
 end

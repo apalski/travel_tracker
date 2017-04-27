@@ -1,0 +1,7 @@
+
+<h1>The Cities You Have Visited:</h1>
+
+<% @city.each do |city| %>
+	<h3><a href="/cities/<%= city.id %>"> <%= city.name %></a> in <%= city.country.name %></h3>
+<% end %>	
+
