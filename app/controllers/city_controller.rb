@@ -6,6 +6,10 @@ class CityController < ApplicationController
 		erb :'cities/city_index'
 	end	
 
+	get '/cities/new' do
+		erb :'cities/city_new'
+	end	
+
 	get '/cities/:id' do
 		@city = City.find_by_id(params[:id])
 		erb :'cities/city_show'

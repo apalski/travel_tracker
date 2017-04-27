@@ -1,6 +1,9 @@
 
 <h1>The Cities You Have Visited:</h1>
 
+<h2><a href="/cities/new">Create a new city:</a></h2>
+
+
 <% @city.each do |city| %>
 	<h3><a href="/cities/<%= city.id %>"> <%= city.name %></a> in <%= city.country.name %></h3>
 <% end %>	
