@@ -27,4 +27,10 @@ class CityController < ApplicationController
 		@city.save
 		redirect to "/cities/#{@city.id}"
 	end	
+
+	post '/cities/:id/delete' do
+		@city = City.find_by_id(params[:id])
+		@city.delete
+		redirect to "/cities"
+	end	
 end

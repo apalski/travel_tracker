@@ -5,3 +5,9 @@
 <form action="/cities/<%= @city.id %>" method="post">
 	<input type="submit" value="Edit City"/>
 </form>	
+
+<h2>To delete this city:</h2>
+<form action="/cities/<%= @city.id %>/delete" method="post">
+	<input type="hidden" id="hidden" name="_method" value="delete" />
+	<input type="submit" value="Delete City"/>
+</form>	
