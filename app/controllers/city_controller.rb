@@ -27,9 +27,13 @@ class CityController < ApplicationController
 
 	post '/cities/:id/edit' do
 		@city = City.find_by_id(params[:id])
-		@city.name = params[:name]
-		@city.save
-		redirect to "/cities/#{@city.id}"
+		if !params[:name].empty?
+			@city.name = params[:name]
+			@city.save
+			redirect to "/cities/#{@city.id}"
+		else 
+			redirect to "/cities"
+		end	
 	end	
 
 	post '/cities/:id/delete' do
