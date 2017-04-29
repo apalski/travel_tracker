@@ -44,7 +44,7 @@ class UserController < ApplicationController
   	if user 
       if user.authenticate(params[:password])
         session["user_id"] = user.id
-        redirect to "/"
+        redirect to "/users/#{user.id}"
       else
         flash[:message] = "Your password was incorrect, please try again"
         redirect to "/users/login"
@@ -58,6 +58,11 @@ class UserController < ApplicationController
   get '/users/:id' do
     @user = User.find_by_id(params[:id])
     erb :'users/users_show'
+  end
+
+  get '/users/:id/edit' do
+
+  end
 
   get '/users/logout' do
     if Helpers.is_logged_in?(session)
