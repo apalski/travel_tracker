@@ -3,7 +3,17 @@
 
 <h2><a href="/countries/new">Create a new country:</a></h2>
 
+<% if flash.has?(:message) %>
+	<h2><%= flash[:message] %></h2>
+<% end %>	
 
+<% countries = [] %>
 <% @country.each do |country| %>
+	<% countries << country %>
+<% end %>	
+<% new_countries = countries.sort_by {|country| country.name} %>
+<% new_countries.each do |country| %>
 	<h3><a href="/countries/<%= country.id %>"> <%= country.name %></a></h3>
 <% end %>	
+
+<h3><a href="/">Return to the main menu:</a></h3>	

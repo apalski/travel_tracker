@@ -1,0 +1,11 @@
+<h1>Edit your Country <%= @country.name %></h1>
+
+<form action="/countries/<%= @country.id %>/edit" method="post">
+	<input id="hidden" type="hidden" name="_method" value="patch"/>
+	<input type="text" name="name" id="country_name" />
+	<input type="submit" value="Edit Country" />
+</form>	
+
+<h3><a href="/countries">Return to the list of countries:</a></h3>
+
+<h3><a href="/">Return to the main menu:</a></h3>

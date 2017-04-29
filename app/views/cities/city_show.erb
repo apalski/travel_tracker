@@ -1,5 +1,5 @@
 
-<h1>Your city is <%= @city.name %></h1>
+<h1>Your city is <%= @city.name %> in <%= @city.country.name %></h1>
 
 <h2>To edit this city:</h2>
 <form action="/cities/<%= @city.id %>" method="post">
@@ -11,3 +11,7 @@
 	<input type="hidden" id="hidden" name="_method" value="delete" />
 	<input type="submit" value="Delete City"/>
 </form>	
+
+<h3><a href="/cities">Return to the list of cities:</a></h3>
+
+<h3><a href="/">Return to the main menu:</a></h3>

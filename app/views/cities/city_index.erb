@@ -3,8 +3,27 @@
 
 <h2><a href="/cities/new">Create a new city:</a></h2>
 
-
-<% @city.each do |city| %>
-	<h3><a href="/cities/<%= city.id %>"> <%= city.name %></a> in <%= city.country.name %></h3>
+<% if flash.has?(:message) %>
+	<h2><%= flash[:message] %></h2>
 <% end %>	
 
+<% countries = [] %>
+<% @country.each do |country| %>
+	<% countries << country %>
+<% end %>
+<% countries_new = countries.sort_by {|country| country.name} %>
+<% countries_new.each do |country| %>	
+	<% cities = [] %>
+	<% if !country.cities.empty? %> 
+		<h2><%= country.name %></h2>
+	<% end %>	
+	<% country.cities.each do |city| %>
+		<% cities << city %>
+	<% end %>
+	<% new_cities = cities.sort_by {|city| city.name} %>
+	<% new_cities.each do |city| %>
+		<a href="/cities/<%= city.id %>"><%= city.name  %></a>
+	<% end %>	
+<% end %>	
+
+<h3><a href="/">Return to the main menu:</a></h3>	

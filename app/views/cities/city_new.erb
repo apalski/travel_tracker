@@ -1,9 +1,15 @@
 
 <h1>Create Your New City Here:</h1>
-<h3>You will need to supply the country this city is in</h3>
+<h3>You will need to supply the country this city is in to complete this action</h3>
 
-<form action="/cities/new" action = "post">
+<form action="/cities" method="post">
+	<label>City Name:</label>
 	<input type="text" name="city_name" id="city_name" />
+	<label>Country Name:</label>
 	<input type="text" name="country_name" id="country_name" />
 	<input type="submit" value="Create City" />
 </form>	
+
+<h3><a href="/cities">Return to the list of cities:</a></h3>
+
+<h3><a href="/">Return to the main menu:</a></h3>

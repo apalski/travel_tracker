@@ -9,6 +9,8 @@ ActiveRecord::Base.establish_connection(
 )
 
 require 'pry'
+require 'rack-flash'
+require 'sinatra/base'
 
 require_all 'app'
 
