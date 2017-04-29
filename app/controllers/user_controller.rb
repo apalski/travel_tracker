@@ -40,13 +40,18 @@ class UserController < ApplicationController
   end
 
   post '/login' do
-  user = User.find_by(:username => params[:username])
-  	if user && user.authenticate(params[:password])
-      session["user_id"] = user.id
-      redirect to "/tweets"
+    user = User.find_by(:username => params[:username])
+  	if user 
+      if user.authenticate(params[:password])
+        session["user_id"] = user.id
+        redirect to "/"
+      else
+        flash[:message] = "Your password was incorrect, please try again"
+        redirect to "/users/login"
+      end
     else
-      redirect to "/login"
-    end
+      flash[:message] = "You must be a registered Travel Tracker to use the app, please sign up"
+      redirect to 'users/signup' 
 	end
 
   get '/users/:slug' do
