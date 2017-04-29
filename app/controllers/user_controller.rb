@@ -54,15 +54,6 @@ class UserController < ApplicationController
       redirect to 'users/signup' 
 	end
 
-  get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    if !@user.nil?
-      erb :'/users/user_tweets'
-    else 
-      redirect to '/login'
-    end
-  end      
-
   get '/logout' do
     if Helpers.is_logged_in?(session)
       session.clear
