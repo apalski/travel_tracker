@@ -1,0 +1,16 @@
+
+<h1>Welcome to Travel Tracker</h1>
+    <h3>Log In Please</h3>
+
+	<% if !Helpers.current_user(session) %>
+	    <form action="/login" method="post">
+	      <label for="name">Username</label>
+	      <input type="text" name="username" id="username">
+	      <label for="password">Password</label>
+	      <input type="text" name="password" id="password">
+	      <input type='submit' name='submit' id='submit' value='Log In'>
+	    </form>
+	 <% else %>
+	 	<h2>You must be a registered Travel Tracker user to use the app</h2>
+	 	<a href="/users/signup">Sign Up to Travel Tracker here</a>
+	 <% end %>	   

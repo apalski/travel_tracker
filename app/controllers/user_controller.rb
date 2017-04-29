@@ -5,7 +5,7 @@ class UserController < ApplicationController
 
 	get '/users/signup' do
     if Helpers.is_logged_in?(session)
-      flash[:message] = "You are already logged in!"
+      flash[:message] = "You are already registered for Travel Tracker!"
       redirect to '/'
     end
     erb :'/users/user_create'
@@ -14,18 +14,27 @@ class UserController < ApplicationController
   post '/users' do
     if !params[:name].empty? 
       if !params[:email].empty?
-        user = User.create(params)
-        session["user_id"] = user.id
-        redirect to '/'
+        if !params[:password].empty?
+          user = User.create(params)
+          session["user_id"] = user.id
+          redirect to '/'
+        else
+          flash[:message] = "You must enter a password to sign up"
+          redirect to 'users/signup'
+        end  
+      else
+        flash[:message] = "You must enter an email address to sign up"
+        redirect to 'users/signup'
     else
-      flash[:message] = "You must have a user name to sign up!"
+      flash[:message] = "You must enter a user name to sign up!"
       redirect to 'users/signup'
     end
   end
 
-  get '/login' do
+  get '/users/login' do
     if Helpers.is_logged_in?(session)
-      redirect to '/tweets'
+      flash[:message] = "You are already logged in!"
+      redirect to '/'
     end
     erb :'/users/login'
   end
