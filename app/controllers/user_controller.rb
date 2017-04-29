@@ -36,10 +36,10 @@ class UserController < ApplicationController
       flash[:message] = "You are already logged in!"
       redirect to '/'
     end
-    erb :'/users/login'
+    erb :'/users/users_login'
   end
 
-  post '/login' do
+  post '/users/login' do
     user = User.find_by(:username => params[:username])
   	if user 
       if user.authenticate(params[:password])
@@ -52,15 +52,16 @@ class UserController < ApplicationController
     else
       flash[:message] = "You must be a registered Travel Tracker to use the app, please sign up"
       redirect to 'users/signup' 
+    end  
 	end
 
-  get '/logout' do
+  get '/users/logout' do
     if Helpers.is_logged_in?(session)
       session.clear
     else
-      redirect to '/'
+      flash[:message] = "You are not logged in to logout!"
+      redirect to '/login'
     end
-    redirect to '/login'
   end
 
 end
