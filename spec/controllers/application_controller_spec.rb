@@ -12,9 +12,9 @@ describe ApplicationController do
 				expect(last_response.body).to include("Welcome to Travel Tracker")
 			end
 
-			it "contains links to countries and cities respective index pages" do
-				expect(page).to have_css("a[href='/countries']")
-				expect(page).to have_css("a[href='/cities']")
+			it "contains links for a user to sign up and log in" do
+				expect(page).to have_css("a[href='/users/signup']")
+				expect(page).to have_css("a[href='/users/login']")
 			end	
 	end		
 end
