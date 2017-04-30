@@ -1,4 +1,4 @@
-# travel_tracker
+# Travel Tracker
 
 Sinatra Application to allow a user to track the countries and their cities that they have visited in the world
 ## Table of Contents
@@ -15,7 +15,7 @@ The Travel Tracker Sinatra Application allows a user to keep track of countries 
 To use this app, just clone, run rake db:migrate and then run shotgun. Everything is set up and ready for you to use.
 
 ## Development
-After checking out the repo, run `bundle exec bin/setup` to install dependencies. Then, run `bundle exec rake spec` to run the tests. You can also run `bundle exec bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bundle install` to install dependencies. You can run `tux` or `rake console` for an interactive prompt that will allow you to experiment.
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/apalski/nsw-national-parks-cli-app. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
