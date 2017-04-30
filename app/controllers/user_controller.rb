@@ -41,10 +41,11 @@ class UserController < ApplicationController
   end
 
   post '/users/login' do
-    user = User.find_by(:username => params[:username])
+    user = User.find_by(:name => params[:name])
   	if user 
       if user.authenticate(params[:password])
         session["user_id"] = user.id
+        flash[:message] = "You have successfully logged in to Travel Tracker"
         redirect to "/users/#{user.id}"
       else
         flash[:message] = "Your password was incorrect, please try again"
@@ -73,8 +74,30 @@ class UserController < ApplicationController
 
   get '/users/:id/edit' do
     @user = User.find_by_id(params[:id])
-
+    erb :'users/users_edit'
   end
 
+  post '/users/:id/edit' do
+    @user = User.find_by_id(params[:id])
+    if !params[:name].empty?
+      @user.name = params[:name]
+    end
+    if !params[:email].empty?
+      @user.email = params[:email]
+    end
+    if !params[:password].empty?
+      @user.password = params[:password]
+    end
+    @user.save     
+    redirect to "/users/#{@user.id}"
+  end
 
+  post '/users/:id/delete' do
+    @user = User.find_by_id(params[:id])
+    session.clear
+    @user.delete
+    flash[:message] = "You are no longer a registered user of Travel Tracker"
+    redirect to '/'
+  end  
 end
+
