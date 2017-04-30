@@ -8,7 +8,7 @@ class UserController < ApplicationController
       flash[:message] = "You are already registered for Travel Tracker!"
       redirect to '/'
     end
-    erb :'/users/user_create'
+    erb :'/users/users_new'
   end
 
   post '/users' do
@@ -25,6 +25,7 @@ class UserController < ApplicationController
       else
         flash[:message] = "You must enter an email address to sign up"
         redirect to 'users/signup'
+      end  
     else
       flash[:message] = "You must enter a user name to sign up!"
       redirect to 'users/signup'
@@ -62,7 +63,7 @@ class UserController < ApplicationController
 
   get '/users/:id/edit' do
     @user = User.find_by_id(params[:id])
-    
+
   end
 
   get '/users/logout' do
