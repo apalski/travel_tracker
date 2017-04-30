@@ -18,7 +18,7 @@ To use this app, just clone, run rake db:migrate and then run shotgun. Everythin
 After checking out the repo, run `bundle install` to install dependencies. You can run `tux` or `rake console` for an interactive prompt that will allow you to experiment.
 
 ## Contributing
-Bug reports and pull requests are welcome on GitHub at https://github.com/apalski/nsw-national-parks-cli-app. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/apalski/travel_tracker. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
 
 ## License
 The gem is available as open source under the terms of the MIT License.
