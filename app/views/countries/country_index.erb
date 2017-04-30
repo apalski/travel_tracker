@@ -9,7 +9,9 @@
 
 <% countries = [] %>
 <% @country.each do |country| %>
-	<% countries << country %>
+	<% if country.user_id == session[:user_id] %>
+		<% countries << country %>
+	<% end %>	
 <% end %>	
 <% new_countries = countries.sort_by {|country| country.name} %>
 <% new_countries.each do |country| %>

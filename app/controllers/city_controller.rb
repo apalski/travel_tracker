@@ -27,9 +27,10 @@ class CityController < ApplicationController
 				if Country.all.include?(@country)
 					@country 
 				else 
-					@country = Country.create(name: params[:country_name])	
+					@country = Country.create(name: params[:country_name], user_id: session[:user_id])	
 				end	
 				@city.country = @country
+				@country.cities << @city
 				@city.save
 				redirect to "/cities/#{@city.id}"
 			else

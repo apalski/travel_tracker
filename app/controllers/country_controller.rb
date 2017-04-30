@@ -19,7 +19,7 @@ class CountryController < ApplicationController
 				flash[:message] = "#{params[:country_name]} already exists"
 				redirect to "/countries"
 			else 
-				@country = Country.create(name: params[:country_name])	
+				@country = Country.create(name: params[:country_name], user_id: session[:user_id])	
 				redirect to "/countries/#{@country.id}"
 			end		
 			redirect to "/countries"	
