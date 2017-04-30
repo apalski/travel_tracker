@@ -17,14 +17,15 @@ class CityController < ApplicationController
 		if !params[:city_name].empty?
 			if !params[:country_name].empty?
 				@city = City.all.detect {|city| city.name == params[:city_name]}
-				if City.all.include?(@city)
+				@user = User.all.detect {|user| user.id == session[:user_id]}
+				if @city != nil && @city.country.user_id == session[:user_id]
 					flash[:message] = "#{@city.name} already exists!"
 					redirect to "/cities"
 				else	
 					@city = City.create(name: params[:city_name])
 				end	
 				@country = Country.all.detect {|country| country.name == params[:country_name]}
-				if Country.all.include?(@country)
+				if @country != nil && @country.user_id == session[:user_id]
 					@country 
 				else 
 					@country = Country.create(name: params[:country_name], user_id: session[:user_id])	

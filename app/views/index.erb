@@ -1,22 +1,24 @@
 
-<h1>Welcome to Travel Tracker</h1>
+	<h1>Welcome to Travel Tracker</h1>
 
-<% if flash.has?(:message) %>
-	<h2><%= flash[:message] %></h2>
-<% end %>
-
-<% if !Helpers.is_logged_in?(session) %>
-	<% if !Helpers.current_user(session) %>
-		<h2>To use this app you must be a registered user and be logged in:</h2>
-		<a href="/users/signup">Sign Up Here</a>
-		<a href="/users/login">Log In Here</a>
-	<% else %>	
-		<h2>You must be logged in to use this app</h2>
-		<a href="/users/login">Log In Here</a>
+	<% if flash.has?(:message) %>
+		<h2><%= flash[:message] %></h2>
 	<% end %>
-<% else %>		
-	<h3><a href="/countries">View Countries You Have Visited:</a></h3>
-	<h3><a href="/cities">View Cities You Have Visited:</a></h3>
-	<h3><a href="/users/logout">Logout</a></h3>
-<% end %>	
 
+	<% if !Helpers.is_logged_in?(session) %>
+		<% if !Helpers.current_user(session) %>
+			<h2>To use this app you must be a registered user and be logged in:</h2>
+			<h3><a href="/users/signup">Sign Up Here</a></h3>
+			<h3><a href="/users/login">Log In Here</a></h3></br>
+			<h1></h1>
+		<% else %>	
+			<h2>You must be logged in to use this app</h2>
+			<a href="/users/login">Log In Here</a></br>
+			<h1></h1>
+		<% end %>
+	<% else %>		
+		<h3><a href="/countries">View Countries You Have Visited:</a></h3>
+		<h3><a href="/cities">View Cities You Have Visited:</a></h3>
+		<h3><a href="/users/logout">Logout</a></h3></br>
+		<h1></h1>
+	<% end %>	

@@ -1,18 +1,23 @@
 
-<h1>Your country is <%= @country.name %></h1>
+<% if @country.user_id == session[:user_id] %>
+	<h1>Your country is <%= @country.name %></h1>
 
-<h2>To edit this country:</h2>
-<form action="/countries/<%= @country.id %>" method="post">
-	<input type="submit" value="Edit Country"/>
-</form>	
+	<h2>To edit this country:</h2>
+	<form action="/countries/<%= @country.id %>" method="post">
+		<input type="submit" value="Edit Country"/>
+	</form>	
 
-<h2>To delete this country:</h2>
-<form action="/countries/<%= @country.id %>/delete" method="post">
-	<input type="hidden" id="hidden" name="_method" value="delete" />
-	<input type="submit" value="Delete Country"/>
-</form>	
+	<h2>To delete this country:</h2>
+	<form action="/countries/<%= @country.id %>/delete" method="post">
+		<input type="hidden" id="hidden" name="_method" value="delete" />
+		<input type="submit" value="Delete Country"/>
+	</form>	
+<% else %>
+	<h3>This is not your country to view</h3>	
+<% end %>	
 
 <h3><a href="/countries">Return to the list of countries:</a></h3>
 
-<h3><a href="/">Return to the main menu:</a></h3>
+<h3><a href="/">Return to the main menu:</a></h3></br>
+<h1></h1>
 

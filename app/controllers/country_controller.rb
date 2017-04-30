@@ -15,7 +15,7 @@ class CountryController < ApplicationController
 	post '/countries' do
 		if !params[:country_name].empty?
 			@country = Country.all.detect {|country| country.name == params[:country_name]}
-			if Country.all.include?(@country)
+			if @country != nil && @country.user_id == session[:user_id]
 				flash[:message] = "#{params[:country_name]} already exists"
 				redirect to "/countries"
 			else 
