@@ -61,7 +61,8 @@ class UserController < ApplicationController
   end
 
   get '/users/:id/edit' do
-
+    @user = User.find_by_id(params[:id])
+    
   end
 
   get '/users/logout' do
