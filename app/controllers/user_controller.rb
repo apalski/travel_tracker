@@ -17,7 +17,7 @@ class UserController < ApplicationController
         if !params[:password].empty?
           user = User.create(params)
           session["user_id"] = user.id
-          redirect to '/'
+          redirect to '/users/login'
         else
           flash[:message] = "You must enter a password to sign up"
           redirect to 'users/signup'
@@ -56,6 +56,16 @@ class UserController < ApplicationController
     end  
 	end
 
+  get '/users/logout' do
+    if Helpers.is_logged_in?(session)
+      session.clear
+      redirect to '/users/login'
+    else
+      flash[:message] = "You are not logged in to logout!"
+      redirect to '/users/login'
+    end
+  end
+
   get '/users/:id' do
     @user = User.find_by_id(params[:id])
     erb :'users/users_show'
@@ -66,13 +76,5 @@ class UserController < ApplicationController
 
   end
 
-  get '/users/logout' do
-    if Helpers.is_logged_in?(session)
-      session.clear
-    else
-      flash[:message] = "You are not logged in to logout!"
-      redirect to '/login'
-    end
-  end
 
 end
