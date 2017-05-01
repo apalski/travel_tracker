@@ -1,17 +1,20 @@
+<% if Helpers.current_user(session) %>
+	<h1>Edit your Country <%= @country.name %></h1>
 
-<h1>Edit your Country <%= @country.name %></h1>
+	<% if @country.user_id == session[:user_id] %>
+		<form action="/countries/<%= @country.id %>/edit" method="post">
+			<input id="hidden" type="hidden" name="_method" value="patch"/>
+			<input type="text" name="name" id="country_name" />
+			<input type="submit" value="Edit Country" />
+		</form>	
+	<% else %>
+		<h3>This is not your country to edit </h3>
+	<% end %>		
 
-<% if @country.user_id == session[:user_id] %>
-	<form action="/countries/<%= @country.id %>/edit" method="post">
-		<input id="hidden" type="hidden" name="_method" value="patch"/>
-		<input type="text" name="name" id="country_name" />
-		<input type="submit" value="Edit Country" />
-	</form>	
+	<h3><a href="/countries">Return to the list of countries:</a></h3>
+
+	<h3><a href="/">Return to the main menu:</a></h3>
 <% else %>
-	<h3>This is not your country to edit </h3>
-<% end %>		
-
-<h3><a href="/countries">Return to the list of countries:</a></h3>
-
-<h3><a href="/">Return to the main menu:</a></h3></br>
-<h1></h1>
+	<h2>You are not a Travel Tracker User</h2>
+	<h2><a href="users/signup">Sign Up To Travel Tracker</a></h2>
+<% end %>	
