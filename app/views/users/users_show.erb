@@ -1,22 +1,26 @@
-<% if flash.has?(:message) %>
-	<h2><%= flash[:message] %></h2>
+
+<% if Helpers.current_user(session) %>
+	<% if flash.has?(:message) %>
+		<h2><%= flash[:message] %></h2>
+	<% end %>	
+
+	<h1>Your Profile Page</h1>
+
+	<h2>Profile settings for <%= @user.name %>:</h2>
+	<h2>Current email: <%= @user.email %></h2>
+
+	<h2><a href="/users/<%= @user.id %>/edit">To edit your profile</a></h2>
+
+	<form action="/users/<%= @user.id %>/delete" method="post">
+		<input type="hidden" id="hidden" name="_method" value="delete" />
+		<h2>To delete your profile: - CAUTION this will erase all your information</h2>
+		<input type="submit" value="Delete Profile" />
+	</form>	
+
+	<h2><a href="/">Main Travel Tracker Menu</a></h2>
+
+	<h3><a href="/users/logout">Logout</a></h3>
+<% else %>
+	<h2>You are not a Travel Tracker User</h2>
+	<h2><a href="users/signup">Sign Up To Travel Tracker</a></h2>
 <% end %>	
-
-<h1>Your Profile Page</h1>
-
-<h2>Profile settings for <%= @user.name %>:</h2>
-<h2>Current email: <%= @user.email %></h2>
-
-<h2><a href="/users/<%= @user.id %>/edit">To edit your profile</a></h2>
-
-<form action="/users/<%= @user.id %>/delete" method="post">
-	<input type="hidden" id="hidden" name="_method" value="delete" />
-	<h2>To delete your profile: - CAUTION this will erase all your information</h2>
-	<input type="submit" value="Delete Profile" />
-</form>	
-
-<h2><a href="/">Main Travel Tracker Menu</a></h2>
-
-<h3><a href="/users/logout">Logout</a></h3></br>
-<h1></h1>
-

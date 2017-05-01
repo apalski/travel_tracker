@@ -11,6 +11,10 @@ class UserController < ApplicationController
     erb :'/users/users_new'
   end
 
+  get '/users' do
+    erb :'/users/users_new'
+  end  
+
   post '/users' do
     if !params[:name].empty? 
       if !params[:email].empty?
@@ -91,6 +95,10 @@ class UserController < ApplicationController
     @user.save     
     redirect to "/users/#{@user.id}"
   end
+
+  get '/users/:id/delete' do
+    erb :'/users/users_new'
+  end 
 
   post '/users/:id/delete' do
     @user = User.find_by_id(params[:id])

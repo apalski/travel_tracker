@@ -1,15 +1,20 @@
-<h1>Sign Up for Travel Tracker</h1>
 
-<% if flash.has?(:message) %>
-	<h2><%= flash[:message] %></h2>
+<% if Helpers.current_user(session) %>
+	<h1>Sign Up for Travel Tracker</h1>
+
+	<% if flash.has?(:message) %>
+		<h2><%= flash[:message] %></h2>
+	<% end %>	
+
+	<form action="/users" method="POST">
+		<input type="text" name="name" placeholder="Username:">
+	  <input type="text" name="email" placeholder="E-mail:">
+		<input type="password" name="password" placeholder="Password:">
+		<input type="submit" value="Sign Up">
+	</form>
+
+	<h3><a href="/">Main Travel Tracker Menu</a></h3> 
+<% else %>
+	<h2>You are not a Travel Tracker User</h2>
+	<h2><a href="users/signup">Sign Up To Travel Tracker</a></h2>
 <% end %>	
-
-<form action="/users" method="POST">
-	<input type="text" name="name" placeholder="Username:">
-  <input type="text" name="email" placeholder="E-mail:">
-	<input type="password" name="password" placeholder="Password:">
-	<input type="submit" value="Sign Up">
-</form>
-
-<h3><a href="/">Main Travel Tracker Menu</a></h3> </br>
-<h1></h1>
