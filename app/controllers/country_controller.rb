@@ -56,6 +56,10 @@ class CountryController < ApplicationController
 		end	
 	end	
 
+	get '/countries/:id/delete' do
+		erb :'countries/country_index'
+	end	
+
 	post '/countries/:id/delete' do
 		@country = Country.find_by_id(params[:id])
 		if @country.cities.size > 0

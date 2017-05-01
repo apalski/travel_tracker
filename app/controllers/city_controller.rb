@@ -71,6 +71,10 @@ class CityController < ApplicationController
 		end	
 	end	
 
+	get '/cities/:id/delete' do
+		erb :'cities/city_index'
+	end	
+
 	post '/cities/:id/delete' do
 		@city = City.find_by_id(params[:id])
 		@city.delete
