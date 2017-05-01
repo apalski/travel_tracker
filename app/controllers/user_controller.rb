@@ -8,7 +8,7 @@ class UserController < ApplicationController
       flash[:message] = "You are already registered for Travel Tracker!"
       redirect to '/'
     end
-    erb :'/users/users_new'
+    erb :'/index'
   end
 
   get '/users' do
@@ -46,7 +46,7 @@ class UserController < ApplicationController
 
   post '/users/login' do
     user = User.find_by(:name => params[:name])
-  	if user 
+  	if user != nil 
       if user.authenticate(params[:password])
         session["user_id"] = user.id
         flash[:message] = "You have successfully logged in to Travel Tracker"
@@ -55,9 +55,8 @@ class UserController < ApplicationController
         flash[:message] = "Your password was incorrect, please try again"
         redirect to "/users/login"
       end
-    else
-      flash[:message] = "You must be a registered Travel Tracker to use the app, please sign up"
-      redirect to 'users/signup' 
+    else  
+      redirect to '/' 
     end  
 	end
 
