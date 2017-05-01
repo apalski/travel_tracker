@@ -3,7 +3,7 @@ class CountryController < ApplicationController
 
 	use Rack::Flash
 	
- 	get '/countries' do
+ 		get '/countries' do
 		@country = Country.all
 		erb :'countries/country_index'
 	end	
@@ -14,15 +14,16 @@ class CountryController < ApplicationController
 
 	post '/countries' do
 		if !params[:country_name].empty?
-			@country = Country.all.detect {|country| country.name == params[:country_name]}
-			if @country != nil && @country.user_id == session[:user_id]
+			@country = Country.all.select {|country| country.name == params[:country_name]}
+			@users_countries = @country.select {|country| country.user_id == session[:user_id]}
+			@user = User.all.detect {|user| user.id == session[:user_id]}
+			if @users_countries.size > 0 
 				flash[:message] = "#{params[:country_name]} already exists"
 				redirect to "/countries"
 			else 
-				@country = Country.create(name: params[:country_name], user_id: session[:user_id])	
+				@country = Country.create(name: params[:country_name], user_id: @user.id)	
 				redirect to "/countries/#{@country.id}"
-			end		
-			redirect to "/countries"	
+			end	
 		else
 			flash[:message] = "The country was not created, you must enter a country name"
 			redirect to "/countries"	

@@ -16,24 +16,28 @@ class CityController < ApplicationController
 	post '/cities' do
 		if !params[:city_name].empty?
 			if !params[:country_name].empty?
-				@city = City.all.detect {|city| city.name == params[:city_name]}
+				@city = City.all.select {|city| city.name == params[:city_name]}
+				@users_cities = @city.select {|city| city.country.user_id == session[:user_id]}
+				@country = Country.all.select {|country| country.name == params[:country_name]}
+				@users_countries = @country.select {|country| country.user_id == session[:user_id]}
 				@user = User.all.detect {|user| user.id == session[:user_id]}
-				if @city != nil && @city.country.user_id == session[:user_id]
-					flash[:message] = "#{@city.name} already exists!"
+				if @users_cities.size > 0
+					flash[:message] = "#{params[:city_name]} already exists!"
 					redirect to "/cities"
 				else	
-					@city = City.create(name: params[:city_name])
+					@city_new = City.create(name: params[:city_name], country_id: @users_countries[0].id)
 				end	
-				@country = Country.all.detect {|country| country.name == params[:country_name]}
-				if @country != nil && @country.user_id == session[:user_id]
-					@country 
+				if @users_countries.size > 0
+					@users_countries[0]
 				else 
 					@country = Country.create(name: params[:country_name], user_id: session[:user_id])	
 				end	
-				@city.country = @country
-				@country.cities << @city
-				@city.save
-				redirect to "/cities/#{@city.id}"
+				if @city_new != nil
+					@city_new.country = @users_countries[0]
+					@users_countries[0].cities << @city_new
+					@city_new.save
+				end	
+				redirect to "/cities/#{@city_new.id}"
 			else
 				flash[:message] = "City not created you must enter a country name"
 				redirect to "/cities"	

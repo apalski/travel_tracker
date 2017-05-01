@@ -16,7 +16,6 @@ Traveller Tracker App:
 	* A city has a name and country_id
 
 * A user must sign-up to the app to access the site
-* Successful signup automatically logs new user in
 * A user must log-in to use the app
 * A user must only be able to view and edit their own countries and cities content
 * A user must signup with a name, email and password
