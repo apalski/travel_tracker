@@ -1,17 +1,21 @@
 
-<h1>Edit your City <%= @city.name %></h1>
+<% if Helpers.current_user(session) %>
+	<h1>Edit your City <%= @city.name %></h1>
 
-<% if @city.country.user_id == session[:user_id] %>
-	<form action="/cities/<%= @city.id %>/edit" method="post">
-		<input id="hidden" type="hidden" name="_method" value="patch"/>
-		<input type="text" name="name" id="city_name" />
-		<input type="submit" value="Edit City" />
-	</form>	
+	<% if @city.country.user_id == session[:user_id] %>
+		<form action="/cities/<%= @city.id %>/edit" method="post">
+			<input id="hidden" type="hidden" name="_method" value="patch"/>
+			<input type="text" name="name" id="city_name" />
+			<input type="submit" value="Edit City" />
+		</form>	
+	<% else %>
+		<h3>This is not your city to edit</h3>
+	<% end %>		
+
+	<h3><a href="/cities">Return to the list of cities:</a></h3>
+
+	<h3><a href="/">Return to the main menu:</a></h3>
 <% else %>
-	<h3>This is not your city to edit</h3>
+	<h2>You are not a Travel Tracker User</h2>
+	<h2><a href="users/signup">Sign Up To Travel Tracker</a></h2>
 <% end %>		
-
-<h3><a href="/cities">Return to the list of cities:</a></h3>
-
-<h3><a href="/">Return to the main menu:</a></h3></br>
-<h1></h1>

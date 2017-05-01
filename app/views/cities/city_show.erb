@@ -1,23 +1,26 @@
 
+<% if Helpers.current_user(session) %>
+	<% if @city.country.user_id == session[:user_id] %>
+		<h1>Your city is <%= @city.name %> in <%= @city.country.name %></h1>
 
-<% if @city.country.user_id == session[:user_id] %>
-	<h1>Your city is <%= @city.name %> in <%= @city.country.name %></h1>
+		<h2>To edit this city:</h2>
+		<form action="/cities/<%= @city.id %>" method="post">
+			<input type="submit" value="Edit City"/>
+		</form>	
 
-	<h2>To edit this city:</h2>
-	<form action="/cities/<%= @city.id %>" method="post">
-		<input type="submit" value="Edit City"/>
-	</form>	
+		<h2>To delete this city:</h2>
+		<form action="/cities/<%= @city.id %>/delete" method="post">
+			<input type="hidden" id="hidden" name="_method" value="delete" />
+			<input type="submit" value="Delete City"/>
+		</form>	
+	<% else %>
+		<h3>This is not your city to view</h3>
+	<% end %>		
 
-	<h2>To delete this city:</h2>
-	<form action="/cities/<%= @city.id %>/delete" method="post">
-		<input type="hidden" id="hidden" name="_method" value="delete" />
-		<input type="submit" value="Delete City"/>
-	</form>	
+	<h3><a href="/cities">Return to the list of cities:</a></h3>
+
+	<h3><a href="/">Return to the main menu:</a></h3>
 <% else %>
-	<h3>This is not your city to view</h3>
+	<h2>You are not a Travel Tracker User</h2>
+	<h2><a href="users/signup">Sign Up To Travel Tracker</a></h2>
 <% end %>		
-
-<h3><a href="/cities">Return to the list of cities:</a></h3>
-
-<h3><a href="/">Return to the main menu:</a></h3></br>
-<h1></h1>
