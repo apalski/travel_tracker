@@ -37,3 +37,10 @@ Traveller Tracker App:
 
 * A country cannot be deleted if it has cities attached to it, the cities must be deleted first
 
+##City Controller
+* Handles the city index page
+* Creates new cities unless city already exists
+* Handles editing an existing city
+* Handles the display page for a city which contains links to edit and delete a city
+* Handles deleting a city
+

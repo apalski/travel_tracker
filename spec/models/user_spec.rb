@@ -16,6 +16,12 @@ describe "User" do
 		@user.countries << @country1
 		@user.countries << @country2
 	end
+
+	after do
+		City.destroy_all
+		Country.destroy_all
+		User.destroy_all
+	end
 	
 	it "has a name, an email and a password" do
 		expect(@user.name).to eq("Mary")

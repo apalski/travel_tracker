@@ -10,6 +10,12 @@ describe "City" do
 
 	end
 
+	after do
+		City.destroy_all
+		Country.destroy_all
+		User.destroy_all
+	end
+
 	it "has a name" do
 		expect(@city.name).to eq("Sydney")
 	end

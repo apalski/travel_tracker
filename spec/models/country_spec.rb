@@ -9,6 +9,12 @@ describe "Country" do
 
 		@user = User.create(:name => "Mary", :email => "mary@gmail.com", :password => "mary_007")
 	end
+
+	after do
+		City.destroy_all
+		Country.destroy_all
+		User.destroy_all
+	end
 	
 	it "has a name" do
 		expect(@country.name).to eq("Australia")
