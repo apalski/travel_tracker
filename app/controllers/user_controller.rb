@@ -12,11 +12,17 @@ class UserController < ApplicationController
   end  
 
   post '/users' do
-    user = User.all.detect {|user| user.id == session[:user_id]}
+    @user_email = User.all.select {|user| user.email == params[:email]}
     if !params[:name].empty? 
       if !params[:email].empty?
         if !params[:password].empty?
-          if user == nil
+          if Helpers.is_logged_in?(session)
+            flash[:message] = "You are already logged in!"
+            redirect to '/'
+          elsif @user_email.size > 0
+            flash[:message] = "You are already a registered user"
+            redirect to '/users/login'
+          else 
             user = User.create(params)
             flash[:message] = "You have successfully signed-up"
             redirect to '/users/login'

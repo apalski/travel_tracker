@@ -24,18 +24,26 @@ class CityController < ApplicationController
 				if @users_cities.size > 0
 					flash[:message] = "#{params[:city_name]} already exists!"
 					redirect to "/cities"
-				else	
-					@city_new = City.create(name: params[:city_name], country_id: @users_countries[0].id)
+				else
+					@city_new = City.create(name: params[:city_name])
 				end	
 				if @users_countries.size > 0
 					@users_countries[0]
 				else 
-					@country = Country.create(name: params[:country_name], user_id: session[:user_id])	
+					@country_new = Country.create(name: params[:country_name], user_id: session[:user_id])	
 				end	
 				if @city_new != nil
-					@city_new.country = @users_countries[0]
-					@users_countries[0].cities << @city_new
-					@city_new.save
+					if @country_new != nil
+						@city_new.country = @country_new
+						@city_new.country_id = @country_new.id
+						@country_new.cities << @city_new
+						@city_new.save
+					else	
+						@city_new.country = @users_countries[0]
+						@city_new.country_id = @users_countries[0].id
+						@users_countries[0].cities << @city_new
+						@city_new.save
+					end	
 				end	
 				redirect to "/cities/#{@city_new.id}"
 			else
